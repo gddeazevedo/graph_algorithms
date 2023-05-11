@@ -43,6 +43,10 @@ void bfs(Graph* g, int init_node) {
 
 void print_int_array(int* array, int size) {
     for (int i = 0; i < size; i++) {
+        if (array[i] == -1) {
+            printf("NIL ");
+            continue;
+        }
         printf("%d ", array[i]);
     }
 
@@ -59,13 +63,19 @@ void print_char_array(char* array, int size) {
 
 void print_arrays(Queue* q, int* d, int* pi, char* colors, int size) {
     printf("\n--------\n");
+
+    printf("Nodes:     ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", i);
+    }
+
+    printf("\nParents: ");
+    print_int_array(pi, size);
+
     printf("Distances: ");
     print_int_array(d, size);
 
-    printf("Parents: ");
-    print_int_array(pi, size);
-
-    printf("Colors: ");
+    printf("Colors:    ");
     print_char_array(colors, size);
 
     printf("Queue: ");
