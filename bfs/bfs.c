@@ -1,44 +1,43 @@
 #include "bfs.h"
 
-void bfs(Graph* g, int init_node) {
-    int d[g->total_nodes]; // distance from init_node
-    int pi[g->total_nodes]; // parantes of each node
-    unsigned char colors[g->total_nodes]; // colors to keep track of seeing nodes
-    Queue* q = newQueue();
+void bfs(Graph *g, int init_node) {
+    int parents[g->total_nodes];
+    int distances[g->total_nodes];
+    enum Color colors[g->total_nodes];
+    Queue *q = newQueue();
 
     for (int i = 0; i < g->total_nodes; i++) {
         if (i != init_node) {
-            d[i] = INT_MAX;
-            pi[i] = NIL;
-            colors[i] = WHITE;
+            parents[i] = NIL;
+            distances[i] = INT_MAX;
+            colors[i] = White;
         }
     }
 
-    d[init_node] = 0;
-    colors[init_node] = GREY;
-    pi[init_node] = NIL;
-
+    colors[init_node] = Grey;
+    distances[init_node] = 0;
+    parents[init_node] = NIL;
     enqueue(q, init_node);
 
     while (!is_empty(q)) {
-        print_arrays(q, d, pi, colors, g->total_nodes);
-
+        print_arrays(q, distances, parents, colors, g->total_nodes);
         int u = dequeue(q);
 
-        for (Node* node = g->adj_list[u]; node != NULL; node = node->next) {
+        for (Node *node = g->adj_list[u]; node != NULL; node = node->next) {
             int v = node->data;
-            if (colors[v] == WHITE) {
-                colors[v] = GREY;
-                d[v] = d[u] + 1;
-                pi[v] = u;
+
+            if (colors[v] == White) {
+                colors[v] = Grey;
+                distances[v] = distances[u] + 1;
+                parents[v] = u;
                 enqueue(q, v);
             }
         }
 
-        colors[u] = BLACK;
+        colors[u] = Black;
     }
 
-    print_arrays(q, d, pi, colors, g->total_nodes);
+    print_arrays(q, distances, parents, colors, g->total_nodes);
 }
 
 void print_int_array(int* array, int size) {
@@ -53,15 +52,15 @@ void print_int_array(int* array, int size) {
     printf("\n");
 }
 
-void print_char_array(char* array, int size) {
+void print_colors_array(enum Color *colors, int size){
     for (int i = 0; i < size; i++) {
-        printf("%c ", array[i]);
+        printf("%c ", colors[i]);
     }
 
     printf("\n");
 }
 
-void print_arrays(Queue* q, int* d, int* pi, char* colors, int size) {
+void print_arrays(Queue* q, int* d, int* pi, enum Color *colors, int size) {
     printf("\n--------\n");
 
     printf("Nodes:     ");
@@ -76,7 +75,7 @@ void print_arrays(Queue* q, int* d, int* pi, char* colors, int size) {
     print_int_array(d, size);
 
     printf("Colors:    ");
-    print_char_array(colors, size);
+    print_colors_array(colors, size);
 
     printf("Queue: ");
     print_queue(q);
