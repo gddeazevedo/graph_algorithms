@@ -9,7 +9,7 @@
 #define NIL -1
 
 enum Color {
-    Black, Grey, White
+    Black = 'b', Grey = 'g', White = 'w'
 };
 
 void bfs(Graph* g, int init_node);
