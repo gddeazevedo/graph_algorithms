@@ -1,7 +1,7 @@
 #include "./graph/graph.h"
 #include "./bfs/bfs.h"
+#include "./dfs/dfs.h"
 
-void dfs(Graph* g, int init_node);
 
 void main() {
     Graph* g = newGraph(9);
@@ -32,5 +32,5 @@ void main() {
 
     print_graph(g);
 
-    bfs(g, 0);
+    depth_first_search(g);
 }

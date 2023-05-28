@@ -6,12 +6,6 @@
 #include "../graph/graph.h"
 #include <limits.h>
 
-#define NIL -1
-
-enum Color {
-    Black = 'b', Grey = 'g', White = 'w'
-};
-
 void bfs(Graph* g, int init_node);
 void print_int_array(int* array, int size);
 void print_colors_array(enum Color *colors, int size);

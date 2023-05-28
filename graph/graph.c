@@ -1,11 +1,11 @@
 #include "graph.h"
 
-Graph* newGraph(int total_nodes) {
+Graph* newGraph(int nodes) {
     Graph* g = (Graph*) malloc(sizeof(Graph));
-    g->total_nodes = total_nodes;
-    g->adj_list = (Node**) malloc(total_nodes * sizeof(Node*));
+    g->nodes = nodes;
+    g->adj_list = (Node**) malloc(nodes * sizeof(Node*));
 
-    for (int node = 0; node < total_nodes; node++) {
+    for (int node = 0; node < nodes; node++) {
         g->adj_list[node] = NULL;
     }
 
@@ -20,13 +20,13 @@ Node* newNode(int data) {
 }
 
 void add_node(Graph* g) {
-    g->total_nodes += 1;
-    g->adj_list = realloc(g->adj_list, sizeof(Node*) * g->total_nodes);
-    g->adj_list[g->total_nodes - 1] = NULL;
+    g->nodes += 1;
+    g->adj_list = realloc(g->adj_list, sizeof(Node*) * g->nodes);
+    g->adj_list[g->nodes - 1] = NULL;
 }
 
 void add_edge(Graph* g, int n, int m) {
-    if (n >= g->total_nodes || m >= g->total_nodes) return;
+    if (n >= g->nodes || m >= g->nodes) return;
 
     Node* new_node = newNode(m);
     new_node->next = g->adj_list[n];
@@ -81,7 +81,7 @@ void remove_edge(Graph* g, int n, int m) {
 }
 
 void print_graph(Graph* g) {
-    for (int node = 0; node < g->total_nodes; node++) {
+    for (int node = 0; node < g->nodes; node++) {
         Node* current = g->adj_list[node];
 
         printf("[%d] -> ", node);

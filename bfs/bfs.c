@@ -1,12 +1,12 @@
 #include "bfs.h"
 
 void bfs(Graph *g, int init_node) {
-    int parents[g->total_nodes];
-    int distances[g->total_nodes];
-    enum Color colors[g->total_nodes];
+    int parents[g->nodes];
+    int distances[g->nodes];
+    enum Color colors[g->nodes];
     Queue *q = newQueue();
 
-    for (int i = 0; i < g->total_nodes; i++) {
+    for (int i = 0; i < g->nodes; i++) {
         if (i != init_node) {
             parents[i] = NIL;
             distances[i] = INT_MAX;
@@ -20,7 +20,7 @@ void bfs(Graph *g, int init_node) {
     enqueue(q, init_node);
 
     while (!is_empty(q)) {
-        print_arrays(q, distances, parents, colors, g->total_nodes);
+        print_arrays(q, distances, parents, colors, g->nodes);
         int u = dequeue(q);
 
         for (Node *node = g->adj_list[u]; node != NULL; node = node->next) {
@@ -37,7 +37,7 @@ void bfs(Graph *g, int init_node) {
         colors[u] = Black;
     }
 
-    print_arrays(q, distances, parents, colors, g->total_nodes);
+    print_arrays(q, distances, parents, colors, g->nodes);
 }
 
 void print_int_array(int* array, int size) {

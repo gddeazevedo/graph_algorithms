@@ -4,17 +4,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define NIL -1
+
+enum Color {
+    Black = 'b', Grey = 'g', White = 'w'
+};
+
 typedef struct __node {
     int data;
     struct __node* next;
 } Node;
 
 typedef struct __graph {
-    int total_nodes;
+    int nodes;
     Node** adj_list;
 } Graph;
 
-Graph* newGraph(int total_nodes);
+Graph* newGraph(int nodes);
 Node* newNode(int data);
 void add_node(Graph* g);
 void add_edge(Graph* g, int n, int m);
