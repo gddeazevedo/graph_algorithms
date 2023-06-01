@@ -2,35 +2,20 @@
 #include "./bfs/bfs.h"
 #include "./dfs/dfs.h"
 
-
 void main() {
-    Graph* g = newGraph(9);
+    int nodes, edges;
+    int node1, node2, weight;
+    scanf("%d %d", &nodes, &edges);
 
-    add_edge(g, 0, 1);
-    add_edge(g, 0, 2);
+    Graph *g = newGraph(nodes);
+    int w[nodes][nodes];
 
-    add_edge(g, 1, 0);
-    add_edge(g, 1, 3);
-    add_edge(g, 1, 4);
-    add_edge(g, 1, 5);
-
-    add_edge(g, 2, 0);
-    add_edge(g, 2, 6);
-
-    add_edge(g, 3, 1);
-    add_edge(g, 4, 1);
-
-    add_edge(g, 5, 1);
-    add_edge(g, 5, 7);
-
-    add_edge(g, 6, 2);
-    add_edge(g, 6, 8);
-
-    add_edge(g, 7, 5);
-
-    add_edge(g, 8, 6);
+    for (int i = 1; i <= edges; i++) {
+        scanf("%d %d %d", &node1, &node2, &weight);
+        add_edge(g, node1, node2);
+        w[node1][node2] = weight;
+        w[node2][node1] = weight;
+    }
 
     print_graph(g);
-
-    depth_first_search(g);
 }

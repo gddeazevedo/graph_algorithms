@@ -23,6 +23,7 @@ typedef struct __graph {
 Graph* newGraph(int nodes);
 Node* newNode(int data);
 void add_node(Graph* g);
+void d_add_edge(Graph *g, int n, int m);
 void add_edge(Graph* g, int n, int m);
 void remove_node(Graph* g, int n);
 void remove_edge(Graph* g, int n, int m);

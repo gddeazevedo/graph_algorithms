@@ -25,12 +25,17 @@ void add_node(Graph* g) {
     g->adj_list[g->nodes - 1] = NULL;
 }
 
-void add_edge(Graph* g, int n, int m) {
+void d_add_edge(Graph* g, int n, int m) {
     if (n >= g->nodes || m >= g->nodes) return;
 
     Node* new_node = newNode(m);
     new_node->next = g->adj_list[n];
     g->adj_list[n] = new_node;
+}
+
+void add_edge(Graph* g, int n, int m) {
+    d_add_edge(g, n, m);
+    d_add_edge(g, m, n);
 }
 
 void remove_node(Graph* g, int n) {
